@@ -22,7 +22,12 @@
 int starting_point_interactive(void);
 
 
+/* memory_functions2.c */
+int bfree(void **);
 
+/* buildin.c */
+void _myExit(shell_t *);
+void _printEnv(shell_t *);
 
 
 #endif
