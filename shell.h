@@ -28,7 +28,8 @@ void copy(char to[], char from[]);
 int bfree(void **);
 
 /* buildin.c */
-void _myExit(shell_t *);
-void _printEnv(shell_t *);
+int _builtIn(char **token, list_t *env, int num, char **command);
+
+int _strcmp(const char *s1, const char *s2);
 
 #endif

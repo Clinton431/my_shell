@@ -1,53 +1,38 @@
 #include "shell.h"
-
 /**
- * _myExit - simple implementation of exit
- * @ptrs: structure containing all malloced memory.
- */
-
-void _myExit(shell_t *ptrs)
+* built_in - handles builtins (exit, env, cd)
+* @token: user's typed command
+* @env: environmental variable
+* @num: take in nth user command typed to write error message
+* @command: bring in command to free
+* Return: 1 if acted on builtin, 0 if not
+*/
+int _builtIn(char **token, list_t *env, int num, char **command)
 {
-	unsigned int i;
-	char *exit_str;
+int i = 0;
 
-	exit_str = ptrs->input_token[1];
-	if (exit_str != NULL || ptrs == NULL)
-	{
-		errno = 0;
-		for (i = 0; exit_str[i] != '\0'; i++)
-		{
-			errno = errno * 10 + (exit_str[i] - '0');
-		}
-	}
-	free_shell_t(ptrs);
-	if (errno > 255)
-	{
-		errno %= 256;
-	}
-	exit(errno);
+if (_strcmp(token[0], "exit") == 0)
+{
+i = __exit(token, env, num, command);
 }
-
-/**
- *   _printEnv - prints out the current environment
- *   @ptrs: structure containing all malloced memory
- */
-void _printEnv(shell_t *ptrs)
+else if (_strcmp(token[0], "env") == 0)
 {
-	unsigned int i, k;
-	char newline = '\n';
-
-	(void)ptrs;
-	if (environ == NULL)
-		return;
-
-	for (i = 0; environ[i] != NULL; i++)
-	{
-		k = _strlen(environ[i]);
-		if (k != 0)
-		{
-			write(STDOUT_FILENO, environ[i], k);
-			write(STDOUT_FILENO, &newline, 1);
-		}
-	}
-	errno = 0;
+_env(token, env);
+i = 1;
+}
+else if (_strcmp(token[0], "cd") == 0)
+{
+i = _cd(token, env, num);
+}
+else if (_strcmp(token[0], "setenv") == 0)
+{
+_setenv(&env, token);
+i = 1;
+}
+else if (_strcmp(token[0], "unsetenv") == 0)
+{
+_unsetenv(&env, token);
+i = 1;
+}
+return (i);
 }
