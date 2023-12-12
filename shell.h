@@ -31,5 +31,9 @@ int bfree(void **);
 int _builtIn(char **token, list_t *env, int num, char **command);
 
 int _strcmp(const char *s1, const char *s2);
+char *_strcpy(char *dest, char *src);
+
+
+int _getLength(char *str);
 
 #endif
