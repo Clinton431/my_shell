@@ -19,8 +19,10 @@
 #define MAXSIZE 1024 /* maximum input line length */
 
 /*Function Prototypes*/
-int starting_point_interactive(void);
-int getline(char line[], int maxline);
+int prompt();
+int handle_execution(char **arg);
+ssize_t get_line(char **linePointer, size_t *lineLength, FILE *stream);
+char *str_tok(char *string, const char * delimiter);
 void copy(char to[], char from[]);
 
 
@@ -28,7 +30,7 @@ void copy(char to[], char from[]);
 int bfree(void **);
 
 /* buildin.c */
-int _builtIn(char **token, list_t *env, int num, char **command);
+/* int _builtIn(char **token, list_t *env, int num, char **command); list_t undefined */
 
 int _strcmp(const char *s1, const char *s2);
 char *_strcpy(char *dest, char *src);
