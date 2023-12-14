@@ -22,7 +22,7 @@ void forking_executing(char **argInput);
 char **extract_args(char *cmdStr, char **args);
 int _strcmp(const char *s1, const char *s2);
 char *_stringChr(char *s, char c);
-void wait_child(pid_t child_id, char *usrInput);
+void wait_child(pid_t child_id, char **usrInput);
 
 
 /* memory_functions2.c */
