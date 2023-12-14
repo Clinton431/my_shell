@@ -1,4 +1,4 @@
-#include "myShell.h"
+#include "main.h"
 #include <stddef.h>
 /**
  * _stringChr- checks for character c in the string given
