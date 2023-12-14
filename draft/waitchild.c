@@ -1,6 +1,6 @@
 #include "myShell.h"
 
-void wait_child(pid_t child_id, char *usrInput)
+void wait_child(pid_t child_id, char **usrInput)
 {
         pid_t killChild;
         int status;
