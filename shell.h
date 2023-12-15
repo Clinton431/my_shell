@@ -37,5 +37,7 @@ char *_strcpy(char *dest, char *src);
 
 
 int _getLength(char *str);
-
+size_t _getLine(char **str);
+char *_strdup(char *str);
+char *get_env(char *str, list_t *env);
 #endif
