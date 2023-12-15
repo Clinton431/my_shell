@@ -4,7 +4,7 @@ void forking_executing(char **args)
 {
         pid_t child;
         pid_t my_shell_pid;
-        extern char **enviroment;
+        extern char **environ;
         char *path_var = NULL;
         char **path = NULL;
         int i;
@@ -40,7 +40,7 @@ void forking_executing(char **args)
 
                 if (child == 0)
                 {
-                        if (execve(args[0], args, enviroment) == -1)
+                        if (execve(args[0], args, environ) == -1)
                         {
                                 perror("No such file or directory");
                                 exit(EXIT_FAILURE);
@@ -95,7 +95,7 @@ void forking_executing(char **args)
 
                                                 if (child == 0)
                                                 {
-                                                        if (execve(args[0], args, enviroment) == -1)
+                                                        if (execve(args[0], args, environ) == -1)
                                                         {
                                                                 perror("Error on execve");
                                                                 exit(EXIT_FAILURE);
