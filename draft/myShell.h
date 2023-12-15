@@ -9,6 +9,7 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <stddef.h>
+#include <dirent.h>
 
 /*#defines*/
 #define MAXSIZE 1024 /* maximum input line length */

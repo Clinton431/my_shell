@@ -7,6 +7,8 @@ void forking_executing(char **args)
         extern char **enviroment;
         char *path_var = NULL;
         char **path = NULL;
+        int i;
+        int j;
 
         for (int i = 0; environ[i] != NULL; i++)
         {
