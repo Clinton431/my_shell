@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <stddef.h>
 
 /*#defines*/
 #define MAXSIZE 1024 /* maximum input line length */
@@ -23,6 +24,7 @@ char **extract_args(char *cmdStr, char **args);
 int _strcmp(const char *s1, const char *s2);
 char *_stringChr(char *s, char c);
 void wait_child(pid_t child_id, char **usrInput);
+char **extract_path(char *path_var, char **path);
 
 
 /* memory_functions2.c */

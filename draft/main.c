@@ -28,6 +28,7 @@ int main(int ac, char **arg)
  */
 int prompt()
 {
+        int proceed = 1;
         char *prompt;
         char *cmdStr = NULL;
         char **args = NULL;
@@ -38,33 +39,41 @@ int prompt()
         int return_handle_execution;
         int i;
 
-        prompt = "$ ";
-        count = strlen(prompt);
-        return_write = write(1, prompt, count);
-        if (return_write == -1)
-                perror("Error writing to stdinput");
-        else if (return_write < (signed)count)
-                perror("Warning: insufficient size");
-
-        read_getline = getline(&cmdStr, &len, stdin);
-
-        if (read_getline != 1)
+        while (proceed == 1)
         {
-                if (cmdStr[read_getline - 1] == '\n')
+                prompt = "$ ";
+                count = strlen(prompt);
+                return_write = write(1, prompt, count);
+                if (return_write == -1)
+                        perror("Error writing to stdinput");
+                else if (return_write < (signed)count)
+                        perror("Warning: insufficient size");
+
+                read_getline = getline(&cmdStr, &len, stdin);
+
+                if (read_getline != 1)
                 {
-                        cmdStr[read_getline - 1] = '\0';
-                }
-                
-                args = extract_args(cmdStr, args);
+                        if (_strcmp(cmdStr, "exit") == 0)
+                                exit(EXIT_SUCCESS);
+                        else if (cmdStr[read_getline - 1] == '\n')
+                                cmdStr[read_getline - 1] = '\0';
+                        
+                        args = extract_args(cmdStr, args);
 
-                /*for(i = 0; args[i] != NULL; i++)
-                        printf("%s ", args[i]);*/
-                
-                forking_executing(args);
+                        /*for(i = 0; args[i] != NULL; i++)
+                                printf("%s ", args[i]);*/
+                        
+                        forking_executing(args);
+                }
+                else
+                {
+                        perror("Error reading input.");
+                        free(cmdStr);
+                }
+
+                if (write(stdin, "\n", 1) == -1)
+                        perror("Error writing output.");
         }
-        else
-        {
-                printf("Error reading input.\n");
-		free(cmdStr);
-        }
+
+        return 0;
 }

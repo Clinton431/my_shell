@@ -34,7 +34,7 @@ char **extract_args(char *cmdStr, char **args)
         token_count++; /*holds the last token:'\0'*/
         args = malloc(sizeof(char) * token_count);
         
-        token = strtok(cmdStr, " -");
+        token = strtok(cmdStr, " ");
         for (i = 0; token!=NULL; i++)
         {
                 token_len = strlen(token);
